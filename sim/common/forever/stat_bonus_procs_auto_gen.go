@@ -5591,6 +5591,8 @@ func RegisterAllProcs() {
 	// https://www.wowhead.com/forever/spell=1292574
 	// Not simulated: Field Agent Beverage: "Resist Charm 06" (1297455) - ignored aura type 117
 	// https://www.wowhead.com/forever/spell=1297455
+	// Not simulated: Wintersaber Hide Lined Gloves: "Mount Speed" (1315778) - ignored aura type 130
+	// https://www.wowhead.com/forever/spell=1315778
 	// Not simulated: Mithril Blacksmith Hammer: "Concussed" (1318163) - ignored aura type 33
 	// https://www.wowhead.com/forever/spell=1318163
 }
