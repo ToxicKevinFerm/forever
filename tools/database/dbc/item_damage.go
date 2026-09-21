@@ -21,14 +21,14 @@ func (item *Item) WeaponDps(itemLevel int) float64 {
 	switch item.InventoryType {
 	case INVTYPE_WEAPON, INVTYPE_WEAPONMAINHAND, INVTYPE_WEAPONOFFHAND:
 		{
-			if item.Flags1.Has(CASTER_WEAPON) {
+			if item.Flags4.Has(CASTER_WEAPON_CLASSIC) {
 				return dbcInstance.ItemDamageTable["ItemDamageOneHandCaster"][ilvl].Quality[quality]
 			} else {
 				return dbcInstance.ItemDamageTable["ItemDamageOneHand"][ilvl].Quality[quality]
 			}
 		}
 	case INVTYPE_2HWEAPON:
-		if item.Flags1.Has(CASTER_WEAPON) {
+		if item.Flags4.Has(CASTER_WEAPON_CLASSIC) {
 			return dbcInstance.ItemDamageTable["ItemDamageTwoHandCaster"][ilvl].Quality[quality]
 		} else {
 			return dbcInstance.ItemDamageTable["ItemDamageTwoHand"][ilvl].Quality[quality]
