@@ -19,6 +19,9 @@
 			}
 		},
 		{ "action": { "condition": { "variableRef": { "name": "Melee weave" } }, "groupReference": { "groupName": "Weave" } } },
+		{ "action": { "castSpell": { "spellId": { "spellId": 14271 } } } },
+		{ "action": { "castSpell": { "spellId": { "spellId": 1317257 } } } },
+		{ "action": { "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25295 } } } } }, "castSpell": { "spellId": { "spellId": 25295 } } } },
 		{
 			"action": {
 				"condition": {
@@ -95,12 +98,12 @@
 						"condition": {
 							"and": {
 								"vals": [
-									{ "auraIsInactive": { "auraId": { "spellId": 34074 } } },
+									{ "auraIsInactive": { "auraId": { "spellId": 415423 } } },
 									{ "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "variableRef": { "name": "Viper start" } } } }
 								]
 							}
 						},
-						"castSpell": { "spellId": { "spellId": 34074 } }
+						"castSpell": { "spellId": { "spellId": 415423 } }
 					}
 				},
 				{

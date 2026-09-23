@@ -670,7 +670,7 @@ func (aa *AutoAttacks) startPull(sim *Simulation) {
 }
 
 func (wa *WeaponAttack) IsInRange() bool {
-	return (wa.MinRange == 0. || wa.MinRange < wa.unit.DistanceFromTarget) && (wa.MaxRange == 0. || wa.MaxRange >= wa.unit.DistanceFromTarget)
+	return (wa.MinRange == 0. || wa.MinRange <= wa.unit.DistanceFromTarget) && (wa.MaxRange == 0. || wa.MaxRange >= wa.unit.DistanceFromTarget)
 }
 
 // Stops the auto swing action for the rest of the iteration. Used for pets

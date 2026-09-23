@@ -15,8 +15,6 @@ func init() {
 }
 
 func TestHunter(t *testing.T) {
-	t.Skip("class talents and abilities are stubbed pending their Forever implementations; " +
-		"the golden numbers cannot be meaningful until then")
 	weaveRotation := core.GetAplRotation("../../ui/specs/hunter/dps/apls", "default")
 	weaveRotation.Label = "weave"
 
@@ -37,8 +35,8 @@ func TestHunter(t *testing.T) {
 			Class:      proto.Class_ClassHunter,
 			Race:       proto.Race_RaceOrc,
 			OtherRaces: []proto.Race{proto.Race_RaceNightElf},
-			GearSet:    core.GetGearSet("../../ui/specs/hunter/dps/gear_sets/phase_2/bm", "2h_6p"),
-			Talents:    DefaultBMTalents,
+			GearSet:    core.GetGearSet("../../ui/specs/hunter/dps/gear_sets", "p1"),
+			Talents:    DefaultMMTalents,
 			OtherTalentSets: []core.TalentsCombo{
 				{Label: "SV", Talents: DefaultSVTalents},
 			},
@@ -83,31 +81,22 @@ var DefaultOptions = &proto.Player_Hunter{
 	Hunter: &proto.Hunter{
 		Options: &proto.Hunter_Options{
 			ClassOptions: &proto.HunterOptions{
-				Ammo:             proto.HunterOptions_AdamantiteStinger,
-				PetSingleAbility: false,
-				PetType:          proto.HunterOptions_Ravager,
-				PetUptime:        100.0,
-				QuiverBonus:      proto.HunterOptions_Speed15,
+				PetType: proto.HunterOptions_PetNone,
 			},
 		},
 	},
 }
 
-var DefaultBMTalents = "512002005250122431051-0505201205"
-var DefaultSVTalents = "502-0550201205-333200022003223005103"
+var DefaultMMTalents = "-30535525115023051-50000003"
+var DefaultSVTalents = "-30535505100-500200030050020151"
 
 var DefaultConsumables = &proto.ConsumesSpec{
-	BattleElixirId:   22831, // Elixir of Major Agility
-	GuardianElixirId: 22840, // Elixir of Major Mageblood
-	FoodId:           27659, // Warp Burger
-	PotId:            22838, // Haste Potion
-	ConjuredId:       12662, // Demonic Rune
-	ExplosiveId:      30217, // Adamantite Grenade
-	PetFoodId:        33874, // Kibler's Bits
-	PetScrollAgi:     true,
-	PetScrollStr:     true,
-	SuperSapper:      true,
-	GoblinSapper:     true,
-	ScrollAgi:        true,
-	ScrollStr:        true,
+	PotId:       22838,
+	FlaskId:     22854,
+	FoodId:      27658,
+	ConjuredId:  22788,
+	ExplosiveId: 30217,
+	SuperSapper: true,
+	ScrollAgi:   true,
+	ScrollStr:   true,
 }

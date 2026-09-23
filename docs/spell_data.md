@@ -5,8 +5,8 @@ it. Which one a spell uses is a property of its class:
 
 - **The store**, `sim/core/spelldata`: one generated file holding every spell the sim can reach, and
   resolvers that turn a row into a spell config, an aura, a dot, a talent's modifiers or a proc
-  listener. The warrior reads it through the resolvers; rogue, warlock, mage, druid, priest, shaman
-  and hunter read its rows by hand instead, one value at a time, with no resolver in between.
+  listener. The warrior and the hunter read it through the resolvers; rogue, warlock, mage, druid,
+  priest and shaman read its rows by hand instead, one value at a time, with no resolver in between.
 - **The family tables**, `sim/paladin/spell_data_auto_gen.go`: one generated table per spell family,
   read through `sim/common/shared`. Paladin reads them, and the section retires when paladin ports.
 
@@ -588,10 +588,10 @@ than shipping a store that does not match its source.
 
 ## Reading a row by hand
 
-Rogue, warlock, mage, druid, priest, shaman and hunter read the store the same way paladin reads its
-family tables: a class file names the ladder it needs, picks a rank, and reads every field the
+Rogue, warlock, mage, druid, priest and shaman read the store the same way paladin reads its family
+tables: a class file names the ladder it needs, picks a rank, and reads every field the
 registration wants straight into a plain expression, with no resolver in between. **A row is a
-source of numbers only** in these seven classes' files - no `spelldata.SpellConfig`, `AuraConfig`,
+source of numbers only** in these six classes' files - no `spelldata.SpellConfig`, `AuraConfig`,
 `DotConfig`, `ProcTrigger`, `ParseEffects` or `ParseStatic`. `core.SpellConfig` and `core.DotConfig`
 are built by hand, field by field, the same shapes [Building an ability](#building-an-ability) and
 [Auras and dots](#auras-and-dots) describe for the resolvers, just filled without one.
