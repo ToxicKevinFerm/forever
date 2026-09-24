@@ -3,6 +3,7 @@ package hunter
 import (
 	"cmp"
 	"slices"
+	"time"
 
 	"github.com/wowsims/forever/sim/core"
 	"github.com/wowsims/forever/sim/core/dbcenums"
@@ -63,7 +64,6 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 			},
 			StatInheritance:       hunter.makeStatInheritance(),
 			EnabledOnStart:        true,
-			IsDynamic:             true,
 			StartsAtOwnerDistance: true,
 		}),
 		hunterOwner: hunter,
@@ -75,8 +75,8 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	hp.EnableFocusBar(1.0 + 0.5*float64(hunter.Talents.BestialDiscipline))
 
-	// Classic's 18.17-27.66 damage a second of a 2 s swing. Not normalized: the Faster or Slower
-	// Attack passive changes how often the pet swings, not what a swing deals.
+	// Classic's 18.17-27.66 damage a second of a 2 s swing, normalized in ApplyTalents to the
+	// Faster or Slower Attack passive's swing.
 	hp.EnableAutoAttacks(hp, core.AutoAttackOptions{
 		MainHand: core.Weapon{
 			BaseDamageMin: 18.17 * 2,
@@ -94,17 +94,32 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	return hp
 }
 
-// TODO: TBC's ratios. Hunter Pet Scaling (415429) states every inherited stat without an amount,
-// the server pricing them.
+// Hunter Pet Scaling (415429) states every inherited stat without an amount, the server pricing
+// them: 2 health a point of stamina, 30% of armor, 10% of the higher attack power and all of the
+// ranged crit chance, the racial weapon specializations with it. Not linear, so the pet snapshots
+// them rather than following every change - see registerStatInheritance.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
-			stats.Stamina:     ownerStats[stats.Stamina] * 0.3,
-			stats.Armor:       ownerStats[stats.Armor] * 0.35,
-			stats.AttackPower: ownerStats[stats.RangedAttackPower] * 0.22,
-			stats.SpellDamage: ownerStats[stats.RangedAttackPower] * 0.128,
+			stats.Health:              ownerStats[stats.Stamina] * 2,
+			stats.Armor:               ownerStats[stats.Armor] * 0.3,
+			stats.AttackPower:         max(ownerStats[stats.AttackPower], ownerStats[stats.RangedAttackPower]) * 0.1,
+			stats.PhysicalCritPercent: ownerStats[stats.PhysicalCritPercent] + ownerStats[stats.RangedCritPercent],
 		}
 	}
+}
+
+// The server's HunterPetInheritance: the pet snapshots its owner's stats when summoned and again on
+// any action it takes, at most once every 2 s.
+func (hp *HunterPet) registerStatInheritance() {
+	hp.MakeProcTriggerAura(core.ProcTrigger{
+		Name:     "Hunter Pet Inheritance",
+		Callback: core.CallbackOnSpellHitDealt | core.CallbackOnCastComplete,
+		ICD:      time.Second * 2,
+		Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
+			hp.RefreshInheritedStats(sim)
+		},
+	})
 }
 
 // The family's own damage, armor and health, and what Beast Training taught the pet that changes
@@ -119,7 +134,12 @@ func (hp *HunterPet) ApplyTalents() {
 
 	// An attack speed acts through a Simulation, which a static passive has none of, so these two
 	// are auras the pet is never without.
-	hp.applyPassiveAura(petAttackSpeeds[opts.PetAttackSpeed].Highest())
+	attackSpeed := petAttackSpeeds[opts.PetAttackSpeed].Highest()
+	hp.applyPassiveAura(attackSpeed)
+	if attackSpeed != spelldata.Nil {
+		// Normalized: a faster swing deals less a swing, the damage a second unchanged.
+		hp.AutoAttacks.MHConfig().DamageMultiplier /= 1 + attackSpeed.Effect(dbcenums.A_MOD_ATTACKSPEED, 0).Percent()
+	}
 	if opts.CobraReflexes {
 		hp.applyPassiveAura(cobraReflexesRank)
 		// TODO: In-game testing required. "but reduces damage" states no number; TBC's 15% kept.
@@ -141,6 +161,7 @@ func (hp *HunterPet) GetPet() *core.Pet {
 
 func (hp *HunterPet) Initialize() {
 	hp.Pet.Initialize()
+	hp.registerStatInheritance()
 	for _, ladder := range hp.family.Abilities {
 		hp.registerAbility(ladder.Highest())
 	}
