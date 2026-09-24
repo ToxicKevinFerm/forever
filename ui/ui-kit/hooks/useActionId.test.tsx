@@ -78,6 +78,16 @@ describe('useActionId', () => {
 		expect(anchor(container).dataset.icon).toBe('');
 	});
 
+	it('tells two placeholder ids apart by name and icon, since neither carries an id', () => {
+		deferFill();
+		const { container, rerender } = render(<Probe actionId={ActionId.fromPetName('Cat')} />);
+		expect(anchor(container).dataset.icon).toContain('ability_hunter_pet_cat');
+
+		rerender(<Probe actionId={ActionId.fromPetName('Wolf')} />);
+
+		expect(anchor(container).dataset.icon).toContain('ability_hunter_pet_wolf');
+	});
+
 	// Upstream varied the reforge id here; TBC has no item reforging, and its
 	// ActionId.fromItemId is (itemId, tag?, randomSuffixId?). The random suffix is
 	// the equivalent url-bearing field, so the case still covers what it is for:
