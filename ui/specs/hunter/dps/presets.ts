@@ -63,7 +63,6 @@ export const DefaultIndividualBuffs = IndividualBuffs.create({
 export const DefaultPartyBuffs = PartyBuffs.create({
 	battleShout: TristateEffect.TristateEffectImproved,
 	braidedEterniumChain: true,
-	ferociousInspiration: 1,
 	graceOfAirTotem: TristateEffect.TristateEffectImproved,
 	leaderOfThePack: TristateEffect.TristateEffectImproved,
 	strengthOfEarthTotem: TristateEffect.TristateEffectImproved,
@@ -88,7 +87,6 @@ export const DefaultDebuffs = Debuffs.create({
 	exposeArmor: TristateEffect.TristateEffectImproved,
 	faerieFire: TristateEffect.TristateEffectImproved,
 	giftOfArthas: true,
-	huntersMark: TristateEffect.TristateEffectImproved,
 	insectSwarm: true,
 	judgementOfLight: true,
 	judgementOfWisdom: true,

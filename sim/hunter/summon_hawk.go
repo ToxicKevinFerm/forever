@@ -14,11 +14,11 @@ var summonHawkBaseDamage = summonHawkRank.DamageEffect().Average(core.CharacterL
 // The creature the dive leaves behind, up for 18 s.
 var hawkSummon = spellData.SummonHawkTriggered.ByID(1293248)
 
-// The tooltip's 5% of ranged attack power; the row states no share.
-const summonHawkAPShare = 0.05
+// The tooltip's ${$s1+($rap*($s4/100))}: effect 4 is the share of ranged attack power.
+var summonHawkAPShare = summonHawkRank.EffectN(4).Percent()
 
-// TODO: In-game testing required. The assault is a server script: effect 4's 5 is read as the
-// hawk's attacks after the dive, one every 3 s, each dealing what the dive does.
+// TODO: In-game testing required. The assault is a server script the rows do not state: read as one
+// attack every 3 s for as long as the hawk is up, each dealing what the dive does.
 const hawkAttackInterval = 3 * time.Second
 
 // Effect 3 is the number of hawks up at once; a hawk past it replaces the one with the least time
@@ -37,7 +37,7 @@ func (hunter *Hunter) registerSummonHawk() {
 		config.Dot = core.DotConfig{
 			Aura:          spelldata.AuraConfig(hawkSummon, spelldata.Label("Summon Hawk "+strconv.Itoa(i+1))),
 			TickLength:    hawkAttackInterval,
-			NumberOfTicks: int32(summonHawkRank.EffectN(4).BaseValue()),
+			NumberOfTicks: int32(hawkSummon.Duration() / hawkAttackInterval),
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				baseDamage := summonHawkBaseDamage + summonHawkAPShare*dot.Spell.RangedAttackPower(target)
 				dot.Spell.CalcAndDealDamage(sim, target, baseDamage, dot.Spell.OutcomeRangedCritOnly)

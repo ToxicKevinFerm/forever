@@ -75,7 +75,9 @@ var DefaultOptions = &proto.Player_Hunter{
 	Hunter: &proto.Hunter{
 		Options: &proto.Hunter_Options{
 			ClassOptions: &proto.HunterOptions{
-				PetType: proto.HunterOptions_PetNone,
+				Ammo:        proto.HunterOptions_ThoriumHeadedArrow,
+				QuiverBonus: proto.HunterOptions_AncientSinewWrappedLamina,
+				PetType:     proto.HunterOptions_PetNone,
 			},
 		},
 	},
@@ -144,8 +146,8 @@ func petOptions() []core.SpecOptionsCombo {
 }
 
 var DefaultBMTalents = "5320001505101251-3050552"
-var DefaultMMTalents = "-30535525115023051-50000003"
-var DefaultSVTalents = "-30535505100-500200030050020151"
+var DefaultMMTalents = "-30535525115023051-5"
+var DefaultSVTalents = "-00505505-500250030050220151"
 
 var DefaultConsumables = &proto.ConsumesSpec{
 	PotId:       22838,

@@ -6861,35 +6861,6 @@
 						"hunter": {
 							"type": "object",
 							"properties": {
-								"sting": {
-									"type": "object",
-									"properties": {
-										"label": {
-											"type": "string"
-										},
-										"tooltip": {
-											"type": "string"
-										},
-										"values": {
-											"type": "object",
-											"properties": {
-												"none": {
-													"type": "string"
-												},
-												"serpent_sting": {
-													"type": "string"
-												},
-												"scorpid_sting": {
-													"type": "string"
-												}
-											},
-											"additionalProperties": false,
-											"required": ["none", "serpent_sting", "scorpid_sting"]
-										}
-									},
-									"additionalProperties": false,
-									"required": ["label", "tooltip", "values"]
-								},
 								"melee_weave": {
 									"type": "object",
 									"properties": {
@@ -6945,7 +6916,6 @@
 							},
 							"additionalProperties": false,
 							"required": [
-								"sting",
 								"melee_weave",
 								"time_to_weave",
 								"use_multi",

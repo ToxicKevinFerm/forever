@@ -70,11 +70,9 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 
 	hunter.EnableManaBar()
 
-	// Arrows add their damage per second to a bow or crossbow, times its speed.
-	if ranged := hunter.GetRangedWeapon(); ranged != nil &&
-		(ranged.RangedWeaponType == proto.RangedWeaponType_RangedWeaponTypeBow || ranged.RangedWeaponType == proto.RangedWeaponType_RangedWeaponTypeCrossbow) {
-		hunter.PseudoStats.BonusRangedDps += arrows[hunterOptions.Ammo.String()].DPS
-	}
+	// Arrows add their damage per second to the ranged weapon, times its speed. A gun is taken to
+	// fire them too, so no bullets are kept beside them.
+	hunter.PseudoStats.BonusRangedDps += arrows[hunterOptions.Ammo.String()].DPS
 	hunter.PseudoStats.RangedSpeedMultiplier *= 1 + quivers[hunterOptions.QuiverBonus.String()].Haste/100
 
 	hunter.EnableAutoAttacks(hunter, core.AutoAttackOptions{
@@ -114,6 +112,7 @@ func (hunter *Hunter) Initialize() {
 	hunter.registerMongooseBite()
 	hunter.registerRapidFire()
 	hunter.registerAspects()
+	hunter.registerHuntersMark()
 	hunter.addPvpGloves()
 }
 

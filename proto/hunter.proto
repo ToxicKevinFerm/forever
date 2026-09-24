@@ -66,12 +66,6 @@ message HunterTalents {
 
 // END GENERATED
 
-enum HunterStingType {
-	NoSting = 0;
-	ScorpidSting = 1;
-	SerpentSting = 2;
-}
-
 message HunterOptions {
 	// The quivers the client's items describe, one a ranged attack speed, named as the generated
 	// sim/hunter/ammo_auto_gen.go keys them and numbered by their item id, so the UI lists them from
@@ -155,16 +149,12 @@ message HunterOptions {
 
 message Hunter {
 	message Rotation {
-		RotationType type = 9;
-		HunterStingType sting = 5;
-
 		bool melee_weave = 1;
-		bool weave_only_raptor = 2;
 		int32 time_to_weave = 8;
 		bool use_multi = 3;
 		bool use_arcane = 4;
 
-		reserved 6, 7;
+		reserved 2, 5, 6, 7, 9;
 	}
 	message Options {
 		HunterOptions class_options = 1;

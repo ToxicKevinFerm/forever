@@ -1964,22 +1964,13 @@
 				}
 			},
 			"hunter": {
-				"sting": {
-					"label": "Sting",
-					"tooltip": "Maintains the selected Sting on the primary target",
-					"values": {
-						"none": "None",
-						"serpent_sting": "Serpent Sting",
-						"scorpid_sting": "Scorpid Sting"
-					}
-				},
 				"melee_weave": {
 					"label": "Melee Weaving",
 					"tooltip": "Uses melee weaving in the rotation."
 				},
 				"time_to_weave": {
 					"label": "Time to weave (ms)",
-					"tooltip": "Amount of time, in milliseconds, between when you start moving towards the boss and when you re-engage your ranged autos. Capped at 100ms."
+					"tooltip": "Amount of time, in milliseconds, between when you start moving towards the boss and when you re-engage your ranged autos."
 				},
 				"use_multi": {
 					"label": "Use Multi-Shot",

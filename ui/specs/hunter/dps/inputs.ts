@@ -9,7 +9,7 @@ import { getEnumValues } from '@sim/utils/collections';
 import * as InputHelpers from '@ui-kit/input_helpers';
 
 // The arrows the client's items describe, as the Ammo enum lists them: each value is the arrow's item
-// id, so the icon and the hover tooltip come from the item. Arrows only fire from a bow or crossbow.
+// id, so the icon and the hover tooltip come from the item. Every ranged weapon is taken to fire them.
 export const AmmoInput = <SpecType extends HunterSpecs>() =>
 	InputHelpers.makeClassOptionsEnumIconInput<SpecType, HunterOptions_Ammo>({
 		fieldName: 'ammo',

@@ -73,7 +73,8 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	hp.AddStatDependency(stats.Strength, stats.AttackPower, 2.0)
 	hp.AddStatDependency(stats.Agility, stats.PhysicalCritPercent, core.CritPerAgiMaxLevel[proto.Class_ClassWarrior])
 
-	hp.EnableFocusBar(1.0 + 0.5*float64(hunter.Talents.BestialDiscipline))
+	// Bestial Discipline's effect 1 raises every effect of the pet's focus passive: +50% a rank.
+	hp.EnableFocusBar(spellData.BestialDiscipline.EffectAt(1).MultiplierAt(hunter.Talents.BestialDiscipline))
 
 	// Classic's 18.17-27.66 damage a second of a 2 s swing, normalized in ApplyTalents to the
 	// Faster or Slower Attack passive's swing.

@@ -51,6 +51,9 @@ var ItemSetCryptstalkerArmor = core.NewItemSet(core.ItemSet{
 
 var pvpGloveItemIDs = []int32{23279, 22862, 16463, 16571}
 
+// The gloves' equip spell: Multi-Shot deals 4% more.
+var pvpGloveMultiShot = spelldata.MustFind(28539)
+
 func init() {
 	for _, itemID := range pvpGloveItemIDs {
 		core.NewItemEffect(itemID, func(_ core.Agent) {})
@@ -63,6 +66,6 @@ func (hunter *Hunter) addPvpGloves() {
 		core.SpellModConfig{
 			Kind:       core.SpellMod_DamageDone_Flat,
 			ClassFlags: multiShotRank.ClassFlags,
-			FloatValue: 0.05,
+			FloatValue: pvpGloveMultiShot.EffectN(1).Percent(),
 		})
 }
