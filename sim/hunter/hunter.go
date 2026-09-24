@@ -62,8 +62,9 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 
 	core.FillTalentsProto(hunter.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 
-	if raid.Debuffs != nil && hunter.Options.PetType == proto.HunterOptions_CarrionBird {
-		raid.Debuffs.Screech = false
+	// The hunter casts its own mark, which the raid's permanent one would keep from ever landing.
+	if raid.Debuffs != nil {
+		raid.Debuffs.HuntersMark = false
 	}
 
 	hunter.PseudoStats.CanParry = true

@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/wowsims/forever/sim/core"
+	"github.com/wowsims/forever/sim/core/buffs"
 	"github.com/wowsims/forever/sim/core/dbcenums"
 	"github.com/wowsims/forever/sim/core/proto"
 	"github.com/wowsims/forever/sim/core/spelldata"
@@ -379,7 +380,7 @@ func (hp *HunterPet) registerDustCloud(rank *spelldata.Spell) *core.Spell {
 	effects := map[*core.Unit]*core.ExclusiveEffect{}
 	auras := hp.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		aura := target.GetOrRegisterAura(spelldata.AuraConfig(rank))
-		effects[target] = aura.NewExclusiveEffect(core.MajorArmorReductionEffectCategory, true, core.ExclusiveEffect{
+		effects[target] = aura.NewExclusiveEffect(buffs.ExposeArmorCategory, true, core.ExclusiveEffect{
 			Priority: armor,
 			OnGain: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 				ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, -ee.Priority)

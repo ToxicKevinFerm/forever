@@ -40,10 +40,7 @@ func TestHunter(t *testing.T) {
 			Profession1:      proto.Profession_Engineering,
 			Profession2:      proto.Profession_Blacksmithing,
 
-			Rotation: weaveRotation,
-			OtherRotations: []core.RotationCombo{
-				{Label: "Turret", Rotation: turretRotation},
-			},
+			Rotation: core.GetAplRotation("../../ui/specs/hunter/dps/apls", "default"),
 
 			ItemFilter: core.ItemFilter{
 				ArmorType: proto.ArmorType_ArmorTypeMail,
@@ -150,12 +147,6 @@ var DefaultMMTalents = "-30535525115023051-5"
 var DefaultSVTalents = "-00505505-500250030050220151"
 
 var DefaultConsumables = &proto.ConsumesSpec{
-	PotId:       22838,
-	FlaskId:     22854,
-	FoodId:      27658,
-	ConjuredId:  22788,
-	ExplosiveId: 30217,
-	SuperSapper: true,
-	ScrollAgi:   true,
-	ScrollStr:   true,
+	ConjuredId:   12662, // Demonic Rune
+	GoblinSapper: true,
 }
