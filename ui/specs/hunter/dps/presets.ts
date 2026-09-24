@@ -4,6 +4,7 @@ import {
 	Hunter_Options as HunterOptions,
 	Hunter_Rotation,
 	HunterOptions_Ammo,
+	HunterOptions_PetAttackSpeed,
 	HunterOptions_PetType as PetType,
 	HunterOptions_QuiverBonus,
 } from '@generated/proto/hunter';
@@ -37,9 +38,11 @@ export const DefaultOptions = HunterOptions.create({
 	classOptions: {
 		ammo: HunterOptions_Ammo.WardensArrow,
 		quiverBonus: HunterOptions_QuiverBonus.Speed15,
-		petType: PetType.Ravager,
+		petType: PetType.Cat,
 		petUptime: 1,
-		petSingleAbility: false,
+		petAttackSpeed: HunterOptions_PetAttackSpeed.PetAttackSpeedNone,
+		cobraReflexes: true,
+		petAggression: 5,
 	},
 });
 

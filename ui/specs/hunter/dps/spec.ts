@@ -100,21 +100,15 @@ export default defineSpec<Spec.SpecHunter>({
 	},
 
 	// IconInputs to include in the 'Player' section on the settings tab.
-	playerIconInputs: [HunterInputs.PetTypeInput(), HunterInputs.QuiverInput(), HunterInputs.AmmoInput()],
+	playerIconInputs: [HunterInputs.QuiverInput(), HunterInputs.AmmoInput()],
+	sections: [HunterInputs.PetSection],
 	// Buff and Debuff inputs to include/exclude, overriding the EP-based defaults.
 	includeBuffDebuffInputs: [Stat.StatSpirit, Stat.StatSpellCritRating, Stat.StatSpellDamage],
 	excludeBuffDebuffInputs: [],
 	rotationInputs: HunterInputs.RotationInputs,
 	// Inputs to include in the 'Other' section on the settings tab.
 	otherInputs: {
-		inputs: [
-			other_inputs.TotemTwisting,
-			HunterInputs.PetUptime(),
-			HunterInputs.PetSingleAbility(),
-			other_inputs.InputDelay,
-			other_inputs.DistanceFromTarget,
-			other_inputs.TankAssignment,
-		],
+		inputs: [other_inputs.TotemTwisting, other_inputs.InputDelay, other_inputs.DistanceFromTarget, other_inputs.TankAssignment],
 	},
 	encounterPicker: {
 		// Whether to include 'Execute Duration (%)' in the 'Encounter' section of the settings tab.

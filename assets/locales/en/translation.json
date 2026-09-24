@@ -550,23 +550,36 @@
 				"label": "Pet Uptime (%)",
 				"tooltip": "Percent of the fight duration for which your pet will be alive."
 			},
-			"pet_single_ability": {
-				"label": "Single Pet Ability",
-				"tooltip": "Pet will only use it's primary ability (Gore, Screech etc.)"
-			},
 			"pet_type": {
-				"label": "Pet Type",
-				"tooltip": "Pet type",
+				"label": "Family",
+				"tooltip": "The family of the tamed creature: its own damage, armor and health, and the abilities it learns.",
 				"no_pet": "No Pet",
 				"bat": "Bat",
 				"bear": "Bear",
+				"bird_of_prey": "Bird of Prey",
+				"boar": "Boar",
+				"carrion_bird": "Carrion Bird",
 				"cat": "Cat",
+				"core_hound": "Core Hound",
 				"crab": "Crab",
-				"owl": "Owl",
+				"crocolisk": "Crocolisk",
+				"fox": "Fox",
+				"gorilla": "Gorilla",
+				"hyena": "Hyena",
 				"raptor": "Raptor",
-				"ravager": "Ravager",
+				"scorpid": "Scorpid",
+				"spider": "Spider",
+				"tallstrider": "Tallstrider",
+				"turtle": "Turtle",
 				"wind_serpent": "Wind Serpent",
-				"dragonhawk": "Dragonhawk"
+				"wolf": "Wolf"
+			},
+			"pet_attack_speed": {
+				"label": "Attack Speed",
+				"tooltip": "The Faster Attack or Slower Attack passive the tamed creature carries on top of the 2 s swing every pet has.",
+				"none": "No Faster or Slower Attack (2.0 s swing)",
+				"faster_attack": "Faster Attack {{rank}}: {{percent}} attack speed",
+				"slower_attack": "Slower Attack {{rank}}: {{percent}} attack speed"
 			},
 			"ammo": {
 				"label": "Ammo",
@@ -675,6 +688,23 @@
 			"warlock_assigned_curse": {
 				"title": "Assigned Curse",
 				"description": "The selected curse will prevent the selected external debuff from being cast."
+			},
+			"pet_training": {
+				"cobra_reflexes": {
+					"label": "Cobra Reflexes",
+					"tooltip": "Beast Training: the pet attacks 30% faster but each attack does less damage.",
+					"untrained": "Cobra Reflexes untrained",
+					"trained": "Cobra Reflexes trained"
+				},
+				"pet_aggression": {
+					"label": "Pet Aggression",
+					"tooltip": "Beast Training: flat damage added to each of the pet's attacks, by rank.",
+					"untrained": "Pet Aggression untrained",
+					"rank": "Pet Aggression rank {{rank}}"
+				}
+			},
+			"pet_section": {
+				"title": "Pet"
 			}
 		},
 		"consumables": {

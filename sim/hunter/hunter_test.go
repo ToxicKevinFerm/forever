@@ -1,6 +1,9 @@
 package hunter
 
 import (
+	"maps"
+	"slices"
+
 	"github.com/wowsims/forever/sim/common"
 	_ "github.com/wowsims/forever/sim/common" // imported to get item effects included.
 	"github.com/wowsims/forever/sim/core"
@@ -85,6 +88,61 @@ var DefaultOptions = &proto.Player_Hunter{
 			},
 		},
 	},
+}
+
+// Every pet family, fully trained, on one race, talent set and rotation: the pet's own suite, so
+// that each family's abilities run without multiplying the hunter's.
+func TestHunterPets(t *testing.T) {
+	turretRotation := core.GetAplRotation("../../ui/specs/hunter/dps/apls", "default")
+	turretRotation.Label = "turret"
+	turretRotation.Rotation.ValueVariables[2] = &proto.APLValueVariable{
+		Name:  "Melee weave",
+		Value: &proto.APLValue{Value: &proto.APLValue_Const{Const: &proto.APLValueConst{Val: "false"}}},
+	}
+
+	families := petOptions()
+	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
+		{
+			Class:            proto.Class_ClassHunter,
+			Race:             proto.Race_RaceOrc,
+			GearSet:          core.GetGearSet("../../ui/specs/hunter/dps/gear_sets", "p1"),
+			Talents:          DefaultMMTalents,
+			Consumables:      DefaultConsumables,
+			SpecOptions:      families[0],
+			OtherSpecOptions: families[1:],
+			StartingDistance: 8,
+			Rotation:         turretRotation,
+			ItemFilter:       core.ItemFilter{ArmorType: proto.ArmorType_ArmorTypeMail},
+		},
+	}))
+}
+
+// One combo per pet family, fully trained.
+func petOptions() []core.SpecOptionsCombo {
+	var combos []core.SpecOptionsCombo
+	for _, value := range slices.Sorted(maps.Values(proto.HunterOptions_PetType_value)) {
+		petType := proto.HunterOptions_PetType(value)
+		if petType == proto.HunterOptions_PetNone {
+			continue
+		}
+		combos = append(combos, core.SpecOptionsCombo{
+			Label: petType.String(),
+			SpecOptions: &proto.Player_Hunter{
+				Hunter: &proto.Hunter{
+					Options: &proto.Hunter_Options{
+						ClassOptions: &proto.HunterOptions{
+							PetType:        petType,
+							PetUptime:      1,
+							CobraReflexes:  true,
+							PetAggression:  5,
+							PetAttackSpeed: proto.HunterOptions_FasterAttackII,
+						},
+					},
+				},
+			},
+		})
+	}
+	return combos
 }
 
 var DefaultMMTalents = "-30535525115023051-50000003"
