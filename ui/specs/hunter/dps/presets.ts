@@ -8,39 +8,46 @@ import {
 	HunterOptions_PetType as PetType,
 	HunterOptions_QuiverBonus,
 } from '@generated/proto/hunter';
-import { defaultExposeWeaknessSettings, defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
+import { SavedTalents } from '@generated/proto/ui';
+import { defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
 
 import DefaultAPL from './apls/default.apl.json';
+import P1GearJson from './gear_sets/p1.gear.json';
+
+export const P1Gear = PresetUtils.makePresetGear('P1', P1GearJson);
 
 export const DefaultRotation = PresetUtils.makePresetAPLRotation('APL', DefaultAPL);
 
 export const TurretRotation = Hunter_Rotation.create({
-	viperStartManaPercent: 0.05,
-	viperStopManaPercent: 0.25,
 	meleeWeave: false,
 	timeToWeave: 400,
-	useMulti: true,
+	useMulti: false,
 	useArcane: true,
 });
 export const TurretSimple = PresetUtils.makePresetSimpleRotation('Turret', Spec.SpecHunter, TurretRotation);
 
 export const WeaveRotation = Hunter_Rotation.create({
-	viperStartManaPercent: 0.05,
-	viperStopManaPercent: 0.25,
 	meleeWeave: true,
 	timeToWeave: 400,
-	useMulti: true,
+	useMulti: false,
 	useArcane: true,
 });
 export const WeaveSimple = PresetUtils.makePresetSimpleRotation('Weave', Spec.SpecHunter, WeaveRotation);
+
+export const BeastMasteryTalents = {
+	name: 'Beast Mastery',
+	data: SavedTalents.create({
+		talentsString: '5320001505101251-005355000101-',
+	}),
+};
 
 export const DefaultOptions = HunterOptions.create({
 	classOptions: {
 		ammo: HunterOptions_Ammo.ThoriumHeadedArrow,
 		quiverBonus: HunterOptions_QuiverBonus.AncientSinewWrappedLamina,
-		petType: PetType.Cat,
+		petType: PetType.Raptor,
 		petUptime: 1,
-		petAttackSpeed: HunterOptions_PetAttackSpeed.PetAttackSpeedNone,
+		petAttackSpeed: HunterOptions_PetAttackSpeed.FasterAttackII,
 		cobraReflexes: true,
 		petAggression: 5,
 	},
@@ -79,7 +86,6 @@ export const DefaultDebuffs = Debuffs.create({
 	curseOfElements: TristateEffect.TristateEffectImproved,
 	curseOfRecklessness: true,
 	exposeArmor: TristateEffect.TristateEffectImproved,
-	...defaultExposeWeaknessSettings(),
 	faerieFire: TristateEffect.TristateEffectImproved,
 	giftOfArthas: true,
 	huntersMark: TristateEffect.TristateEffectImproved,

@@ -22,7 +22,7 @@ func (hunter *Hunter) registerRaptorStrike() {
 	hunter.RaptorStrike = hunter.RegisterSpell(config)
 }
 
-// Returns true if the regular melee swing should be used, false otherwise.
+// The swing a main-hand auto becomes: Raptor Strike when it can be cast, the plain swing otherwise.
 func (hunter *Hunter) TryRaptorStrike(sim *core.Simulation, mhSwingSpell *core.Spell) *core.Spell {
 	if mhSwingSpell.ActionID.Tag != 1 || !hunter.RaptorStrike.CanCast(sim, hunter.CurrentTarget) {
 		return mhSwingSpell

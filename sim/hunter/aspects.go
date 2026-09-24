@@ -8,7 +8,6 @@ import (
 
 var aspectOfTheHawkRank = spellData.AspectOfTheHawk.Highest()
 var aspectOfTheBeastRank = spellData.AspectOfTheBeast.Highest()
-var aspectOfTheViperRank = spellData.AspectOfTheViper.Highest()
 
 // The hastes the aspects proc: Quick Shots off Hawk, Quick Strikes off Beast.
 var quickShots = spellData.AspectOfTheHawkTriggered.Highest()
@@ -17,22 +16,6 @@ var quickStrikes = spellData.AspectOfTheBeastTriggered.Highest()
 func (hunter *Hunter) registerAspects() {
 	hunter.AspectOfTheHawkAura = hunter.registerAspect(aspectOfTheHawkRank)
 	hunter.AspectOfTheBeastAura = hunter.registerAspect(aspectOfTheBeastRank)
-	hunter.AspectOfTheViperAura = hunter.registerAspect(aspectOfTheViperRank)
-
-	// A_OBS_MOD_POWER has no row in the parse table: a share of maximum mana every period, by hand.
-	regen := aspectOfTheViperRank.Effect(dbcenums.A_OBS_MOD_POWER, 0)
-	manaMetrics := hunter.NewManaMetrics(core.ActionID{SpellID: aspectOfTheViperRank.ID})
-	var regenTick *core.PendingAction
-	hunter.AspectOfTheViperAura.ApplyOnGain(func(_ *core.Aura, sim *core.Simulation) {
-		regenTick = core.StartPeriodicAction(sim, core.PeriodicActionOptions{
-			Period: regen.Period(),
-			OnAction: func(sim *core.Simulation) {
-				hunter.AddMana(sim, hunter.MaxMana()*regen.Percent(), manaMetrics)
-			},
-		})
-	}).ApplyOnExpire(func(_ *core.Aura, sim *core.Simulation) {
-		regenTick.Cancel(sim)
-	})
 
 	hunter.registerDeadlyAspects()
 }

@@ -20,18 +20,11 @@ type Hunter struct {
 
 	Pet *HunterPet
 
-	AimedShot    *core.Spell
-	ArcaneShot   *core.Spell
-	MultiShot    *core.Spell
 	RapidFire    *core.Spell
 	RaptorStrike *core.Spell
-	MongooseBite *core.Spell
-	ScorpidSting *core.Spell
-	SerpentSting *core.Spell
 
 	AspectOfTheHawkAura  *core.Aura
 	AspectOfTheBeastAura *core.Aura
-	AspectOfTheViperAura *core.Aura
 	MongooseBiteAura     *core.Aura
 }
 
@@ -69,10 +62,8 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 
 	core.FillTalentsProto(hunter.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 
-	if raid.Debuffs != nil {
-		if hunter.Options.PetType == proto.HunterOptions_CarrionBird {
-			raid.Debuffs.Screech = false
-		}
+	if raid.Debuffs != nil && hunter.Options.PetType == proto.HunterOptions_CarrionBird {
+		raid.Debuffs.Screech = false
 	}
 
 	hunter.PseudoStats.CanParry = true
@@ -104,7 +95,7 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 
 	hunter.AddStatDependency(stats.Strength, stats.AttackPower, 1)
 	hunter.AddStatDependency(stats.Agility, stats.AttackPower, 1)
-	hunter.AddStatDependency(stats.Agility, stats.RangedAttackPower, 1)
+	hunter.AddStatDependency(stats.Agility, stats.RangedAttackPower, 2)
 	hunter.AddStatDependency(stats.Agility, stats.PhysicalCritPercent, core.CritPerAgiMaxLevel[hunter.Class])
 	hunter.AddStatDependency(stats.Agility, stats.DodgeRating, 1.0/25*core.DodgeRatingPerDodgePercent)
 

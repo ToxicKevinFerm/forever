@@ -164,10 +164,7 @@ message Hunter {
 		bool use_multi = 3;
 		bool use_arcane = 4;
 
-		// Switch to Aspect of the Viper when mana goes below this percent.
-		double viper_start_mana_percent = 6;
-		// Switch back to Aspect of the Hawk when mana goes above this percent.
-		double viper_stop_mana_percent = 7;
+		reserved 6, 7;
 	}
 	message Options {
 		HunterOptions class_options = 1;

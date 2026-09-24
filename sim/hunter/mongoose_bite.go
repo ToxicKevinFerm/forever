@@ -38,7 +38,7 @@ func (hunter *Hunter) registerMongooseBite() {
 		hunter.MongooseBiteAura.Deactivate(sim)
 	}
 
-	hunter.MongooseBite = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }
 
 // Expose Prey opens the same window off any attack on a target carrying Hunter's Mark. The rate is

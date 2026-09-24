@@ -24,5 +24,5 @@ func (hunter *Hunter) registerArcaneShot() {
 		})
 	}
 
-	hunter.ArcaneShot = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }

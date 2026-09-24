@@ -21,5 +21,5 @@ func (hunter *Hunter) registerAimedShot() {
 		})
 	}
 
-	hunter.AimedShot = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }

@@ -1996,14 +1996,6 @@
 				"use_arcane": {
 					"label": "Use Arcane Shot",
 					"tooltip": "Include Arcane Shot as a filler in the rotation."
-				},
-				"viper_start_mana_percent": {
-					"label": "Viper start mana %",
-					"tooltip": "Switch to Aspect of the Viper when mana goes below this amount."
-				},
-				"viper_stop_mana_percent": {
-					"label": "Viper stop mana %",
-					"tooltip": "Switch back to Aspect of the Hawk when mana goes above this amount."
 				}
 			},
 			"warrior": {

@@ -210,22 +210,6 @@ export const PetSection: CustomSection<Spec.SpecHunter> = {
 
 export const RotationInputs = {
 	inputs: [
-		InputHelpers.makeRotationNumberInput<Spec.SpecHunter>({
-			fieldName: 'viperStartManaPercent',
-			label: i18n.t('rotation_tab.options.hunter.viper_start_mana_percent.label'),
-			labelTooltip: i18n.t('rotation_tab.options.hunter.viper_start_mana_percent.tooltip'),
-			percent: true,
-			positive: true,
-			max: 100,
-		}),
-		InputHelpers.makeRotationNumberInput<Spec.SpecHunter>({
-			fieldName: 'viperStopManaPercent',
-			label: i18n.t('rotation_tab.options.hunter.viper_stop_mana_percent.label'),
-			labelTooltip: i18n.t('rotation_tab.options.hunter.viper_stop_mana_percent.tooltip'),
-			percent: true,
-			positive: true,
-			max: 100,
-		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecHunter>({
 			fieldName: 'meleeWeave',
 			label: i18n.t('rotation_tab.options.hunter.melee_weave.label'),

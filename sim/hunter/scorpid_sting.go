@@ -35,5 +35,5 @@ func (hunter *Hunter) registerScorpidSting() {
 
 	config.RelatedAuraArrays = auras.ToMap()
 
-	hunter.ScorpidSting = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }

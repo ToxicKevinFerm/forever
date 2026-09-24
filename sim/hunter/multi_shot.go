@@ -21,5 +21,5 @@ func (hunter *Hunter) registerMultiShot() {
 		})
 	}
 
-	hunter.MultiShot = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }

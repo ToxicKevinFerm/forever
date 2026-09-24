@@ -42,5 +42,5 @@ func (hunter *Hunter) registerSerpentSting() {
 		})
 	}
 
-	hunter.SerpentSting = hunter.RegisterSpell(config)
+	hunter.RegisterSpell(config)
 }

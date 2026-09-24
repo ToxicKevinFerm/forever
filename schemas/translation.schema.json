@@ -6969,32 +6969,6 @@
 									},
 									"additionalProperties": false,
 									"required": ["label", "tooltip"]
-								},
-								"viper_start_mana_percent": {
-									"type": "object",
-									"properties": {
-										"label": {
-											"type": "string"
-										},
-										"tooltip": {
-											"type": "string"
-										}
-									},
-									"additionalProperties": false,
-									"required": ["label", "tooltip"]
-								},
-								"viper_stop_mana_percent": {
-									"type": "object",
-									"properties": {
-										"label": {
-											"type": "string"
-										},
-										"tooltip": {
-											"type": "string"
-										}
-									},
-									"additionalProperties": false,
-									"required": ["label", "tooltip"]
 								}
 							},
 							"additionalProperties": false,
@@ -7003,9 +6977,7 @@
 								"melee_weave",
 								"time_to_weave",
 								"use_multi",
-								"use_arcane",
-								"viper_start_mana_percent",
-								"viper_stop_mana_percent"
+								"use_arcane"
 							]
 						},
 						"warrior": {

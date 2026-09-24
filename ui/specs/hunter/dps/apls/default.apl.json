@@ -5,7 +5,6 @@
 		{ "action": { "groupReference": { "groupName": "Move to starting range" } }, "doAtValue": { "const": { "val": "-19s" } } }
 	],
 	"priorityList": [
-		{ "action": { "groupReference": { "groupName": "Mana management" } } },
 		{
 			"action": {
 				"condition": { "cmp": { "op": "OpGe", "lhs": { "currentTime": {} }, "rhs": { "const": { "val": "5s" } } } },
@@ -22,32 +21,6 @@
 		{ "action": { "castSpell": { "spellId": { "spellId": 14271 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 1317257 } } } },
 		{ "action": { "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25295 } } } } }, "castSpell": { "spellId": { "spellId": 25295 } } } },
-		{
-			"action": {
-				"condition": {
-					"or": {
-						"vals": [
-							{ "not": { "val": { "variableRef": { "name": "Melee weave" } } } },
-							{
-								"and": {
-									"vals": [
-										{
-											"cmp": {
-												"op": "OpLe",
-												"lhs": { "spellCastTime": { "spellId": { "spellId": 20904 } } },
-												"rhs": { "autoTimeToNext": { "autoType": "MainHandAuto" } }
-											}
-										},
-										{ "cmp": { "op": "OpGt", "lhs": { "unitDistance": {} }, "rhs": { "variableRef": { "name": "Melee range" } } } }
-									]
-								}
-							}
-						]
-					}
-				},
-				"castSpell": { "spellId": { "spellId": 20904 } }
-			}
-		},
 		{
 			"action": {
 				"condition": {
@@ -87,40 +60,10 @@
 				"castSpell": { "spellId": { "spellId": 2643 } }
 			}
 		},
+		{ "action": { "castSpell": { "spellId": { "spellId": 1293527 } } } },
 		{ "action": { "condition": { "variableRef": { "name": "Use Arcane Shot" } }, "castSpell": { "spellId": { "spellId": 14287 } } } }
 	],
 	"groups": [
-		{
-			"name": "Mana management",
-			"actions": [
-				{
-					"action": {
-						"condition": {
-							"and": {
-								"vals": [
-									{ "auraIsInactive": { "auraId": { "spellId": 415423 } } },
-									{ "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "variableRef": { "name": "Viper start" } } } }
-								]
-							}
-						},
-						"castSpell": { "spellId": { "spellId": 415423 } }
-					}
-				},
-				{
-					"action": {
-						"condition": {
-							"and": {
-								"vals": [
-									{ "auraIsInactive": { "auraId": { "spellId": 25296 } } },
-									{ "cmp": { "op": "OpGe", "lhs": { "currentManaPercent": {} }, "rhs": { "variableRef": { "name": "Viper stop" } } } }
-								]
-							}
-						},
-						"castSpell": { "spellId": { "spellId": 25296 } }
-					}
-				}
-			]
-		},
 		{
 			"name": "Weave",
 			"actions": [
@@ -268,11 +211,9 @@
 		}
 	],
 	"valueVariables": [
-		{ "name": "Viper start", "value": { "const": { "val": "5%" } } },
-		{ "name": "Viper stop", "value": { "const": { "val": "25%" } } },
-		{ "name": "Melee weave", "value": { "const": { "val": "true" } } },
+		{ "name": "Melee weave", "value": { "const": { "val": "false" } } },
 		{ "name": "Time to weave", "value": { "const": { "val": "400ms" } } },
-		{ "name": "Use Multi-Shot", "value": { "const": { "val": "true" } } },
+		{ "name": "Use Multi-Shot", "value": { "const": { "val": "false" } } },
 		{ "name": "Use Arcane Shot", "value": { "const": { "val": "true" } } },
 		{ "name": "Melee range", "value": { "const": { "val": "5.00" } } },
 		{ "name": "Ranged range", "value": { "const": { "val": "8.00" } } },
