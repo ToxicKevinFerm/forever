@@ -111,7 +111,6 @@ export default defineSpec<Spec.SpecFeralBearDruid>({
 		}),
 		partyBuffs: PartyBuffs.create({
 			drums: Drums.LesserDrumsOfBattle,
-			ferociousInspiration: 2,
 			battleShout: TristateEffect.TristateEffectImproved,
 			graceOfAirTotem: TristateEffect.TristateEffectImproved,
 			windfuryTotem: TristateEffect.TristateEffectImproved,

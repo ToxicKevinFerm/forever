@@ -78,7 +78,6 @@ export default defineSpec<Spec.SpecHolyPaladin>({
 		BuffDebuffInputs.Thorns,
 		BuffDebuffInputs.Innervate,
 		BuffDebuffInputs.PowerInfusion,
-		BuffDebuffInputs.FerociousInspiration,
 		BuffDebuffInputs.ManaTideTotem,
 		BuffDebuffInputs.ShadowPriestDPS,
 		BuffDebuffInputs.DrumsBuff,

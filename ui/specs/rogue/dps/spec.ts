@@ -102,7 +102,6 @@ export default defineSpec<Spec.SpecRogue>({
 		}),
 		partyBuffs: PartyBuffs.create({
 			battleShout: TristateEffect.TristateEffectImproved,
-			ferociousInspiration: 1,
 			strengthOfEarthTotem: TristateEffect.TristateEffectImproved,
 			graceOfAirTotem: TristateEffect.TristateEffectImproved,
 			windfuryTotem: TristateEffect.TristateEffectImproved,

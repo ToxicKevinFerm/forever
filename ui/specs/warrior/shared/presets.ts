@@ -8,7 +8,6 @@ export const DefaultIndividualBuffs = IndividualBuffs.create({
 });
 
 export const DefaultPartyBuffs = PartyBuffs.create({
-	ferociousInspiration: 2,
 	braidedEterniumChain: true,
 	graceOfAirTotem: TristateEffect.TristateEffectImproved,
 	strengthOfEarthTotem: TristateEffect.TristateEffectImproved,

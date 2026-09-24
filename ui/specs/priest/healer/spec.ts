@@ -79,7 +79,6 @@ export default defineSpec<Spec.SpecHealerPriest>({
 		BuffDebuffInputs.Thorns,
 		BuffDebuffInputs.Innervate,
 		BuffDebuffInputs.PowerInfusion,
-		BuffDebuffInputs.FerociousInspiration,
 		BuffDebuffInputs.ManaTideTotem,
 		BuffDebuffInputs.ShadowPriestDPS,
 		BuffDebuffInputs.DrumsBuff,

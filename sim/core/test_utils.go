@@ -63,7 +63,6 @@ var FullRaidBuffs = &proto.RaidBuffs{
 }
 
 var FullPartyBuffs = &proto.PartyBuffs{
-	FerociousInspiration:  1,
 	BloodPact:             proto.TristateEffect_TristateEffectImproved,
 	MoonkinAura:           proto.TristateEffect_TristateEffectImproved,
 	LeaderOfThePack:       proto.TristateEffect_TristateEffectImproved,

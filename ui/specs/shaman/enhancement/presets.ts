@@ -42,7 +42,6 @@ export const DefaultConsumables = ConsumesSpec.create({
 });
 
 export const DefaultPartyBuffs = PartyBuffs.create({
-	ferociousInspiration: 2,
 	braidedEterniumChain: true,
 	leaderOfThePack: TristateEffect.TristateEffectRegular,
 	battleShout: TristateEffect.TristateEffectImproved,

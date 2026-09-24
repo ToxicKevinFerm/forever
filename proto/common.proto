@@ -473,7 +473,7 @@ message RaidBuffs {
 
 // Buffs that affect a single party.
 message PartyBuffs {
-	int32 ferocious_inspiration = 1; // Number of BM hunters in party.
+	reserved 1;
 
 	TristateEffect blood_pact = 2;
 	TristateEffect moonkin_aura = 3;

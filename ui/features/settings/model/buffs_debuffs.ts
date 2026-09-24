@@ -131,12 +131,6 @@ export const DraeneiRacialMelee = makeBooleanPartyBuffInput({
 	showWhen: (party: Party) => [Race.RaceDraenei, Race.RaceDwarf, Race.RaceGnome, Race.RaceHuman, Race.RaceNightElf].includes(party.getPlayer(0)!.getRace()),
 });
 export const EyeOfTheNight = makeBooleanPartyBuffInput({ actionId: ActionId.fromSpellId(31033), fieldName: 'eyeOfTheNight', label: 'Eye of the Night' });
-export const FerociousInspiration = makeMultistatePartyBuffInput({
-	actionId: ActionId.fromSpellId(34460),
-	numStates: 5,
-	fieldName: 'ferociousInspiration',
-	label: 'Ferocious Inspiratation',
-});
 export const GraceOfAirTotem = makeTristatePartyBuffInput({
 	actionId: ActionId.fromSpellId(25359),
 	impId: ActionId.fromSpellId(16295),
@@ -316,7 +310,6 @@ export const PARTY_BUFFS_CONFIG = [
 	{ config: CommandingShout, stats: [Stat.StatHealth] },
 	{ config: BattleShout, stats: [Stat.StatAttackPower, Stat.StatRangedAttackPower] },
 	{ config: DevotionAura, stats: [Stat.StatArmor] },
-	{ config: FerociousInspiration, stats: [] },
 	{ config: LeaderOfThePack, stats: [Stat.StatAttackPower, Stat.StatMeleeCritRating] },
 	{ config: ManaSpringTotem, stats: [Stat.StatMP5] },
 	{ config: ManaTideTotem, stats: [Stat.StatMP5] },

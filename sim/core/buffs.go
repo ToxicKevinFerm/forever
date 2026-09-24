@@ -231,10 +231,6 @@ func applyBuffEffects(agent Agent, raidBuffs *proto.RaidBuffs, partyBuffs *proto
 		DraneiRacialAura(char, false)
 	}
 
-	if partyBuffs.FerociousInspiration > 0 {
-		MakePermanent(FerociousInspiration(char, partyBuffs.FerociousInspiration))
-	}
-
 	if partyBuffs.GraceOfAirTotem != proto.TristateEffect_TristateEffectMissing {
 		GraceOfAirTotemAura(char, IsImproved(partyBuffs.GraceOfAirTotem), partyBuffs.TotemTwisting)
 	}
@@ -807,16 +803,6 @@ func DevotionAuraBuff(char *Character, isPlayer bool, rank PaladinAuraRank) *Aur
 	}
 
 	return aura
-}
-
-func FerociousInspiration(char *Character, count int32) *Aura {
-	dmgBuff := 0.03 * float64(count)
-
-	return char.GetOrRegisterAura(Aura{
-		Label:    "Ferocious Inspiration",
-		ActionID: ActionID{SpellID: 34460},
-		Duration: time.Second * 10,
-	}).AttachMultiplicativePseudoStatBuff(&char.PseudoStats.DamageDealtMultiplier, 1+dmgBuff)
 }
 
 func LeaderOfThePackAura(char *Character, improved bool) *Aura {
