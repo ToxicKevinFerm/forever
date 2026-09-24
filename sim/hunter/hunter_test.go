@@ -91,7 +91,8 @@ var DefaultOptions = &proto.Player_Hunter{
 }
 
 // Every pet family, fully trained, on one race, talent set and rotation: the pet's own suite, so
-// that each family's abilities run without multiplying the hunter's.
+// that each family's abilities run without multiplying the hunter's. The talents are Beast Mastery,
+// the pet's tree, and the rotation sends a hawk ahead of each Arcane Shot, the two sharing a cooldown.
 func TestHunterPets(t *testing.T) {
 	turretRotation := core.GetAplRotation("../../ui/specs/hunter/dps/apls", "default")
 	turretRotation.Label = "turret"
@@ -99,6 +100,11 @@ func TestHunterPets(t *testing.T) {
 		Name:  "Melee weave",
 		Value: &proto.APLValue{Value: &proto.APLValue_Const{Const: &proto.APLValueConst{Val: "false"}}},
 	}
+	summonHawk := &proto.APLListItem{Action: &proto.APLAction{Action: &proto.APLAction_CastSpell{CastSpell: &proto.APLActionCastSpell{
+		SpellId: &proto.ActionID{RawId: &proto.ActionID_SpellId{SpellId: summonHawkRank.ID}},
+	}}}}
+	priorityList := turretRotation.Rotation.PriorityList
+	turretRotation.Rotation.PriorityList = slices.Insert(priorityList, len(priorityList)-1, summonHawk)
 
 	families := petOptions()
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
@@ -106,7 +112,7 @@ func TestHunterPets(t *testing.T) {
 			Class:            proto.Class_ClassHunter,
 			Race:             proto.Race_RaceOrc,
 			GearSet:          core.GetGearSet("../../ui/specs/hunter/dps/gear_sets", "p1"),
-			Talents:          DefaultMMTalents,
+			Talents:          DefaultBMTalents,
 			Consumables:      DefaultConsumables,
 			SpecOptions:      families[0],
 			OtherSpecOptions: families[1:],
@@ -145,6 +151,7 @@ func petOptions() []core.SpecOptionsCombo {
 	return combos
 }
 
+var DefaultBMTalents = "5320001505101251-3050552"
 var DefaultMMTalents = "-30535525115023051-50000003"
 var DefaultSVTalents = "-30535505100-500200030050020151"
 

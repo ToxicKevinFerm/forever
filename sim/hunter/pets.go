@@ -51,15 +51,15 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 		Pet: core.NewPet(core.PetConfig{
 			Name:  family.Name,
 			Owner: &hunter.Character,
-			// TODO: TBC's numbers. The client carries no pet base stats, and Hunter Pet Scaling
-			// (415429) states every inherited stat without an amount, the server pricing them.
+			// Classic's level 60 pet (wowsims/classic sim/hunter/pet.go): the client carries no pet
+			// base stats.
 			BaseStats: stats.Stats{
-				stats.Agility:     127,
-				stats.Strength:    162,
+				stats.Strength:    136,
+				stats.Agility:     100,
+				stats.Stamina:     274,
+				stats.Intellect:   50,
+				stats.Spirit:      80,
 				stats.AttackPower: -20, // Apparently pets and warriors have a AP penalty.
-
-				// Add 1.8% because pets aren't affected by that component of crit suppression.
-				stats.MeleeCritRating: (1.1515 + 1.8) * core.PhysicalCritRatingPerCritPercent,
 			},
 			StatInheritance:       hunter.makeStatInheritance(),
 			EnabledOnStart:        true,
@@ -75,12 +75,12 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	hp.EnableFocusBar(1.0 + 0.5*float64(hunter.Talents.BestialDiscipline))
 
-	// TODO: TBC's swing. The client's Faster Attack and Slower Attack passives level every tamed
-	// creature's own speed to one swing, but which creature carries which is not in the tables.
+	// Classic's 18.17-27.66 damage a second of a 2 s swing. Not normalized: the Faster or Slower
+	// Attack passive changes how often the pet swings, not what a swing deals.
 	hp.EnableAutoAttacks(hp, core.AutoAttackOptions{
 		MainHand: core.Weapon{
-			BaseDamageMin: 42,
-			BaseDamageMax: 68,
+			BaseDamageMin: 18.17 * 2,
+			BaseDamageMax: 27.66 * 2,
 			SwingSpeed:    2,
 			MaxRange:      core.MaxMeleeRange,
 		},
@@ -94,6 +94,8 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	return hp
 }
 
+// TODO: TBC's ratios. Hunter Pet Scaling (415429) states every inherited stat without an amount,
+// the server pricing them.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
