@@ -199,7 +199,7 @@ export const TotemOfWrath = makeMultistatePartyBuffInput({
 	fieldName: 'totemOfWrath',
 	label: 'Totem of Wrath',
 });
-export const TrueshotAura = makeBooleanPartyBuffInput({ actionId: ActionId.fromSpellId(27066), fieldName: 'trueshotAura', label: 'Trueshot Aura' });
+export const TrueshotAura = makeBooleanPartyBuffInput({ actionId: ActionId.fromSpellId(20906), fieldName: 'trueshotAura', label: 'Trueshot Aura' });
 export const AspectOfTheWild = makeBooleanPartyBuffInput({
 	actionId: ActionId.fromSpellId(27045),
 	fieldName: 'aspectOfTheWild',

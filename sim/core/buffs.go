@@ -941,15 +941,13 @@ func ConcentrationAura(char *Character, isPlayer bool, rank PaladinAuraRank) *Au
 	return aura
 }
 
+// Rank 5 (20906): ranged attack power only.
 func TrueShotAuraBuff(char *Character) *Aura {
-	apBuff := 125.0
-
 	return makeStatBuff(char, BuffConfig{
 		Label:    "Trueshot Aura",
-		ActionID: ActionID{SpellID: 27066},
+		ActionID: ActionID{SpellID: 20906},
 		Stats: []StatConfig{
-			{stats.RangedAttackPower, apBuff, false},
-			{stats.AttackPower, apBuff, false},
+			{stats.RangedAttackPower, 50, false},
 		},
 	})
 }
