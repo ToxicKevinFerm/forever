@@ -530,14 +530,6 @@
 				"label": "Shadow Priest DPS",
 				"tooltip": "Shadow Priest DPS for Mana Battery purposes. 1000 DPS = 50 mana/sec(250 MP5)."
 			},
-			"expose_weakness_uptime": {
-				"label": "Expose Weakness Uptime",
-				"tooltip": "Uptime of Expose Weakness in %."
-			},
-			"expose_weakness_hunter_agility": {
-				"label": "Expose Weakness Hunter Agility",
-				"tooltip": "The amount of Agility provided by your Hunter. Used for calculating the value of Expose Weakness."
-			},
 			"retribution_aura_spell_power": {
 				"label": "Retribution Aura Spell Power",
 				"tooltip": "The Holy spell power of the paladin providing Retribution Aura. Each hit you take deals the aura's base damage plus about 13.6% of this."

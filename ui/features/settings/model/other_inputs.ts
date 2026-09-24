@@ -241,34 +241,6 @@ export const ShadowPriestDPS = {
 	},
 };
 
-export const ExposeWeaknessUptime = {
-	id: 'exposeWeaknessUptime',
-	type: 'number' as const,
-	label: i18n.t('settings_tab.other.expose_weakness_uptime.label'),
-	labelTooltip: i18n.t('settings_tab.other.expose_weakness_uptime.tooltip'),
-	storeField: 'raid:debuffs' as const,
-	getValue: (player: Player<any>) => Math.round(player.getRaid()!.getDebuffs().exposeWeaknessUptime * 100),
-	setValue: (player: Player<any>, newValue: number) => {
-		const debuffs = player.getRaid()!.getDebuffs();
-		debuffs.exposeWeaknessUptime = newValue / 100;
-		player.getRaid()!.setDebuffs(debuffs);
-	},
-};
-
-export const ExposeWeaknessHunterAgility = {
-	id: 'exposeWeaknessHunterAgility',
-	type: 'number' as const,
-	label: i18n.t('settings_tab.other.expose_weakness_hunter_agility.label'),
-	labelTooltip: i18n.t('settings_tab.other.expose_weakness_hunter_agility.tooltip'),
-	storeField: 'raid:debuffs' as const,
-	getValue: (player: Player<any>) => player.getRaid()!.getDebuffs().exposeWeaknessHunterAgility,
-	setValue: (player: Player<any>, newValue: number) => {
-		const debuffs = player.getRaid()!.getDebuffs();
-		debuffs.exposeWeaknessHunterAgility = newValue;
-		player.getRaid()!.setDebuffs(debuffs);
-	},
-};
-
 // The Holy spell power of the paladin providing Retribution Aura as a party buff (sim/core's
 // RetributionAuraBuff turns it into damage per hit). Only a tank takes the hits, and the number
 // means nothing without the aura, so it shows under both conditions.

@@ -1,5 +1,5 @@
 import { Class, ConsumesSpec, Debuffs, Drums, IndividualBuffs, PartyBuffs, RaidBuffs, TristateEffect } from '@generated/proto/common';
-import { defaultExposeWeaknessSettings, defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
+import { defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
 
 export const DefaultIndividualBuffs = IndividualBuffs.create({
 	blessingOfKings: true,
@@ -25,7 +25,6 @@ export const DefaultRaidBuffs = RaidBuffs.create({
 });
 
 export const DefaultDebuffs = Debuffs.create({
-	...defaultExposeWeaknessSettings(),
 	misery: true,
 	bloodFrenzy: true,
 	giftOfArthas: true,

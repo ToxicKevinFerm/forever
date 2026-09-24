@@ -20,7 +20,7 @@ import * as Mechanics from '@sim/constants/mechanics';
 import { PlayerClasses } from '@sim/player/classes';
 import { Player } from '@sim/player/player';
 import { Stats, UnitStat } from '@sim/proto/stats';
-import { defaultExposeWeaknessSettings, defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
+import { defaultRaidBuffMajorDamageCooldowns } from '@sim/proto/utils';
 import { defineSpec } from '@sim/spec_config';
 
 import * as FeralInputs from './inputs';
@@ -121,7 +121,6 @@ export default defineSpec<Spec.SpecFeralCatDruid>({
 			unleashedRage: true,
 		}),
 		debuffs: Debuffs.create({
-			...defaultExposeWeaknessSettings(),
 			bloodFrenzy: true,
 			exposeArmor: TristateEffect.TristateEffectImproved,
 			huntersMark: TristateEffect.TristateEffectImproved,

@@ -1,7 +1,6 @@
 import * as PresetUtils from '@app/preset_utils';
 import { ConsumesSpec, Debuffs, Drums, IndividualBuffs, PartyBuffs, Profession, Race, RaidBuffs, Spec, TristateEffect } from '@generated/proto/common';
 import { PaladinAura, RetributionPaladin_Options as RetributionPaladinOptions, RetributionPaladin_Rotation as PaladinRotation } from '@generated/proto/paladin';
-import { defaultExposeWeaknessSettings } from '@sim/proto/utils';
 
 import DefaultApl from './apls/default.apl.json';
 
@@ -70,7 +69,6 @@ export const DefaultDebuffs = Debuffs.create({
 	sunderArmor: true,
 	faerieFire: TristateEffect.TristateEffectImproved,
 	exposeArmor: TristateEffect.TristateEffectImproved,
-	...defaultExposeWeaknessSettings(),
 });
 
 export const OtherDefaults = {

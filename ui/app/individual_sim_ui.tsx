@@ -265,7 +265,6 @@ export class SimHostObject<SpecType extends Spec> implements IndividualSimHost<S
 		const hasSpellDamageScaling = epStats.includes(Stat.StatSpellDamage);
 
 		config.otherInputs.inputs = [
-			...(hasAttackPowerScaling ? [OtherInputs.ExposeWeaknessHunterAgility, OtherInputs.ExposeWeaknessUptime] : []),
 			...(hasSpellDamageScaling ? [OtherInputs.ShadowPriestDPS] : []),
 			...(this.player.getPlayerSpec().isTankSpec ? [OtherInputs.RetributionAuraSpellPower] : []),
 			...config.otherInputs.inputs,

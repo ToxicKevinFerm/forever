@@ -20,7 +20,6 @@ import * as Mechanics from '@sim/constants/mechanics';
 import { PlayerClasses } from '@sim/player/classes';
 import { Player } from '@sim/player/player';
 import { Stats, UnitStat } from '@sim/proto/stats';
-import { defaultExposeWeaknessSettings } from '@sim/proto/utils';
 import { defineSpec } from '@sim/spec_config';
 
 import * as FeralBearInputs from './inputs';
@@ -126,7 +125,6 @@ export default defineSpec<Spec.SpecFeralBearDruid>({
 			unleashedRage: true,
 		}),
 		debuffs: Debuffs.create({
-			...defaultExposeWeaknessSettings(),
 			bloodFrenzy: true,
 			exposeArmor: TristateEffect.TristateEffectImproved,
 			faerieFire: TristateEffect.TristateEffectImproved,

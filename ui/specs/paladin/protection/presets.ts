@@ -6,7 +6,6 @@ import {
 	ProtectionPaladin_Options as ProtectionPaladinOptions,
 	ProtectionPaladin_Rotation as ProtectionPaladinRotation,
 } from '@generated/proto/paladin';
-import { defaultExposeWeaknessSettings } from '@sim/proto/utils';
 
 import DefaultApl from './apls/default.apl.json';
 
@@ -80,7 +79,6 @@ export const DefaultDebuffs = Debuffs.create({
 	faerieFire: TristateEffect.TristateEffectImproved,
 	exposeArmor: TristateEffect.TristateEffectImproved,
 	insectSwarm: true,
-	...defaultExposeWeaknessSettings(),
 });
 
 export const OtherDefaults = {

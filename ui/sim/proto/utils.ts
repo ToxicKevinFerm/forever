@@ -160,15 +160,6 @@ export const defaultHealerIndividualBuffs = (): IndividualBuffs =>
 		blessingOfLight: true,
 	});
 
-const exposeWeaknessPhaseSettings: Map<Phase, Pick<Debuffs, 'exposeWeaknessUptime' | 'exposeWeaknessHunterAgility'>> = new Map([
-	[Phase.Phase1, { exposeWeaknessUptime: 0.9, exposeWeaknessHunterAgility: 1080 }],
-	[Phase.Phase2, { exposeWeaknessUptime: 0.9, exposeWeaknessHunterAgility: 1150 }],
-	[Phase.Phase3, { exposeWeaknessUptime: 0.9, exposeWeaknessHunterAgility: 1210 }],
-	[Phase.Phase4, { exposeWeaknessUptime: 0.9, exposeWeaknessHunterAgility: 1150 }],
-	[Phase.Phase5, { exposeWeaknessUptime: 0.9, exposeWeaknessHunterAgility: 1250 }],
-]);
-export const defaultExposeWeaknessSettings = (phase?: Phase) => exposeWeaknessPhaseSettings.get(phase || CURRENT_PHASE);
-
 const improvedShadowBoltPhaseSettings: Map<Phase, Pick<Debuffs, 'isbUptime'>> = new Map([
 	[Phase.Phase1, { isbUptime: 0.52 }],
 	[Phase.Phase2, { isbUptime: 0.59 }],

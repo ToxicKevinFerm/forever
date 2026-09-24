@@ -33,13 +33,6 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 		MakePermanent(DemoralizingShoutAura(target, 5, GetTristateValueInt32(debuffs.DemoralizingShout, 0, 5)))
 	}
 
-	if debuffs.ExposeWeaknessUptime > 0.0 {
-		aura := ExposeWeaknessAura(target, func() float64 {
-			return debuffs.ExposeWeaknessHunterAgility
-		})
-		ApplyFixedUptimeAura(aura, debuffs.ExposeWeaknessUptime, aura.Duration, 1)
-	}
-
 	if debuffs.FaerieFire != proto.TristateEffect_TristateEffectMissing {
 		MakePermanent(FaerieFireAura(target, TernaryFloat64(IsImproved(debuffs.FaerieFire), 3, 0)))
 	}
@@ -324,29 +317,6 @@ func castSlowReductionAura(target *Unit, label string, spellID int32, multiplier
 		},
 	})
 	return aura
-}
-
-type ExposeWeaknessAgiFunc func() float64
-
-func ExposeWeaknessAura(target *Unit, agilityFunc ExposeWeaknessAgiFunc) *Aura {
-	aura := target.GetOrRegisterAura(Aura{
-		Label:     "Expose Weakness",
-		Tag:       "ExposeWeakness",
-		ActionID:  ActionID{SpellID: 34503},
-		Duration:  time.Second * 7,
-		MaxStacks: 10000,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			aura.SetStacks(sim, int32(agilityFunc()*0.25))
-		},
-		OnStacksChange: func(aura *Aura, sim *Simulation, oldStacks int32, newStacks int32) {
-			newValue := float64(newStacks - oldStacks)
-			target.PseudoStats.BonusAttackPower += newValue
-			target.PseudoStats.BonusRangedAttackPower += newValue
-		},
-	})
-
-	return aura
-
 }
 
 func FaerieFireAura(target *Unit, improvedPoints float64) *Aura {

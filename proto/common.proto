@@ -572,8 +572,7 @@ message Debuffs {
 	bool curse_of_recklessness = 16;
 
 	TristateEffect hunters_mark = 17;
-	double expose_weakness_uptime = 18;
-	double expose_weakness_hunter_agility = 19;
+	reserved 18, 19;
 
 	TristateEffect demoralizing_roar = 20;
 	TristateEffect demoralizing_shout = 21;
