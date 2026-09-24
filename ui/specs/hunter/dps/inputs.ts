@@ -5,8 +5,11 @@ import { Player } from '@sim/player/player';
 import { ActionId } from '@sim/proto/action_id';
 import { HunterSpecs } from '@sim/proto/spec_types';
 import type { CustomSection } from '@sim/spec_config';
+import { getEnumValues } from '@sim/utils/collections';
 import * as InputHelpers from '@ui-kit/input_helpers';
 
+// The arrows the client's items describe, as the Ammo enum lists them: each value is the arrow's item
+// id, so the icon and the hover tooltip come from the item. Arrows only fire from a bow or crossbow.
 export const AmmoInput = <SpecType extends HunterSpecs>() =>
 	InputHelpers.makeClassOptionsEnumIconInput<SpecType, HunterOptions_Ammo>({
 		fieldName: 'ammo',
@@ -15,23 +18,14 @@ export const AmmoInput = <SpecType extends HunterSpecs>() =>
 		numColumns: 4,
 		values: [
 			{ value: HunterOptions_Ammo.AmmoNone, tooltip: i18n.t('settings_tab.other.ammo.no_ammo') },
-			{ actionId: ActionId.fromItemId(31737), value: HunterOptions_Ammo.TimelessArrow, tooltip: i18n.t('settings_tab.other.ammo.timeless_arrow') },
-			{ actionId: ActionId.fromItemId(34581), value: HunterOptions_Ammo.MysteriousArrow, tooltip: i18n.t('settings_tab.other.ammo.mysterious_arrow') },
-			{
-				actionId: ActionId.fromItemId(33803),
-				value: HunterOptions_Ammo.AdamantiteStinger,
-				tooltip: i18n.t('settings_tab.other.ammo.adamantite_stinger'),
-			},
-			{
-				actionId: ActionId.fromItemId(30611),
-				value: HunterOptions_Ammo.HalaaniRazorshaft,
-				tooltip: i18n.t('settings_tab.other.ammo.halaani_razorshaft'),
-			},
-			{ actionId: ActionId.fromItemId(28056), value: HunterOptions_Ammo.BlackflightArrow, tooltip: i18n.t('settings_tab.other.ammo.blackflight_arrow') },
-			{ actionId: ActionId.fromItemId(31949), value: HunterOptions_Ammo.WardensArrow, tooltip: i18n.t('settings_tab.other.ammo.wardens_arrow') },
+			...getEnumValues<HunterOptions_Ammo>(HunterOptions_Ammo)
+				.filter(value => value !== HunterOptions_Ammo.AmmoNone)
+				.map(value => ({ value, actionId: ActionId.fromItemId(value) })),
 		],
 	});
 
+// The quivers the client's items describe, one a ranged attack speed, listed from the QuiverBonus
+// enum the way AmmoInput lists the arrows.
 export const QuiverInput = <SpecType extends HunterSpecs>() =>
 	InputHelpers.makeClassOptionsEnumIconInput<SpecType, HunterOptions_QuiverBonus>({
 		extraClassNames: ['quiver-picker'],
@@ -41,12 +35,9 @@ export const QuiverInput = <SpecType extends HunterSpecs>() =>
 		numColumns: 4,
 		values: [
 			{ color: '82e89d', value: HunterOptions_QuiverBonus.QuiverNone, tooltip: i18n.t('settings_tab.other.quiver.no_quiver') },
-			{ actionId: ActionId.fromItemId(18714), value: HunterOptions_QuiverBonus.Speed15, tooltip: i18n.t('settings_tab.other.quiver.speed_15') },
-			{ actionId: ActionId.fromItemId(2662), value: HunterOptions_QuiverBonus.Speed14, tooltip: i18n.t('settings_tab.other.quiver.speed_14') },
-			{ actionId: ActionId.fromItemId(8217), value: HunterOptions_QuiverBonus.Speed13, tooltip: i18n.t('settings_tab.other.quiver.speed_13') },
-			{ actionId: ActionId.fromItemId(7371), value: HunterOptions_QuiverBonus.Speed12, tooltip: i18n.t('settings_tab.other.quiver.speed_12') },
-			{ actionId: ActionId.fromItemId(3605), value: HunterOptions_QuiverBonus.Speed11, tooltip: i18n.t('settings_tab.other.quiver.speed_11') },
-			{ actionId: ActionId.fromItemId(3573), value: HunterOptions_QuiverBonus.Speed10, tooltip: i18n.t('settings_tab.other.quiver.speed_10') },
+			...getEnumValues<HunterOptions_QuiverBonus>(HunterOptions_QuiverBonus)
+				.filter(value => value !== HunterOptions_QuiverBonus.QuiverNone)
+				.map(value => ({ value, actionId: ActionId.fromItemId(value) })),
 		],
 	});
 

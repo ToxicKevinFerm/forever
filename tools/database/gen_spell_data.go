@@ -1225,6 +1225,20 @@ func renderSpellDataFiles(helper *DBHelper) (map[string][]byte, *storeInputs, er
 			}
 			extra[fmt.Sprintf("sim/%s/pet_families_auto_gen.go", pkg)] = petFile
 			ladderIDs = append(ladderIDs, petFamilyRoots(families)...)
+
+			arrows, arrowsSkipped, err := discoverArrows(helper.db)
+			if err != nil {
+				return nil, nil, fmt.Errorf("%s arrows: %w", pkg, err)
+			}
+			quivers, quiversSkipped, err := discoverQuivers(helper.db)
+			if err != nil {
+				return nil, nil, fmt.Errorf("%s quivers: %w", pkg, err)
+			}
+			ammoFile, err := renderAmmoFile(arrows, quivers, append(arrowsSkipped, quiversSkipped...))
+			if err != nil {
+				return nil, nil, fmt.Errorf("%s ammo: %w", pkg, err)
+			}
+			extra[fmt.Sprintf("sim/%s/ammo_auto_gen.go", pkg)] = ammoFile
 		}
 
 		for _, l := range ladders {

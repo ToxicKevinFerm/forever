@@ -584,24 +584,12 @@
 			"ammo": {
 				"label": "Ammo",
 				"tooltip": "Ammo type",
-				"no_ammo": "No Ammo",
-				"timeless_arrow": "Timeless Arrow",
-				"mysterious_arrow": "Mysterious Arrow",
-				"adamantite_stinger": "Adamantite Stinger",
-				"halaani_razorshaft": "Halaani Razorshaft",
-				"blackflight_arrow": "Blackflight Arrow",
-				"wardens_arrow": "Warden's Arrow"
+				"no_ammo": "No Ammo"
 			},
 			"quiver": {
 				"label": "Quiver",
 				"tooltip": "Quiver type",
-				"no_quiver": "No Quiver",
-				"speed_15": "15%",
-				"speed_14": "14%",
-				"speed_13": "13%",
-				"speed_12": "12%",
-				"speed_11": "11%",
-				"speed_10": "10%"
+				"no_quiver": "No Quiver"
 			},
 			"detonate_seed": {
 				"label": "Detonate Seed on Cast",

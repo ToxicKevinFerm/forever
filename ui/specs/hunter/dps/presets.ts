@@ -36,8 +36,8 @@ export const WeaveSimple = PresetUtils.makePresetSimpleRotation('Weave', Spec.Sp
 
 export const DefaultOptions = HunterOptions.create({
 	classOptions: {
-		ammo: HunterOptions_Ammo.WardensArrow,
-		quiverBonus: HunterOptions_QuiverBonus.Speed15,
+		ammo: HunterOptions_Ammo.ThoriumHeadedArrow,
+		quiverBonus: HunterOptions_QuiverBonus.AncientSinewWrappedLamina,
 		petType: PetType.Cat,
 		petUptime: 1,
 		petAttackSpeed: HunterOptions_PetAttackSpeed.PetAttackSpeedNone,

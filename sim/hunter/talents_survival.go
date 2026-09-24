@@ -91,15 +91,30 @@ func (hunter *Hunter) registerPredatorsEdge() {
 	spelldata.ParseStatic(&hunter.Character, spellData.PredatorsEdge.Rank(hunter.Talents.PredatorsEdge))
 }
 
-// Effect 2 is a regeneration buff off a critical strike whose rate the row states nowhere and the
-// store does not carry, so only the cost discount is taken.
+var resourcefulnessBuff = spellData.ResourcefulnessTriggered.Highest()
+
 func (hunter *Hunter) registerResourcefulness() {
 	if hunter.Talents.Resourcefulness == 0 {
 		return
 	}
 
-	spelldata.ParseStatic(&hunter.Character, spellData.Resourcefulness.Rank(hunter.Talents.Resourcefulness),
-		spelldata.Effects(1))
+	rank := spellData.Resourcefulness.Rank(hunter.Talents.Resourcefulness)
+	spelldata.ParseStatic(&hunter.Character, rank, spelldata.Effects(1))
+
+	// A_MOD_MANA_REGEN_INTERRUPT has no row in the parse table, so it is attached by hand.
+	buff := hunter.RegisterAura(spelldata.AuraConfig(resourcefulnessBuff)).
+		AttachAdditivePseudoStatBuff(&hunter.PseudoStats.SpiritRegenRateCasting, resourcefulnessBuff.EffectN(1).Percent())
+
+	// The tooltip's chance is $m3, an effect the row does not carry. In game it is 30/60% by rank,
+	// the cost discount's own ladder.
+	chance := -spellData.Resourcefulness.EffectAt(1).FractionAt(hunter.Talents.Resourcefulness)
+	trigger := spelldata.ProcTrigger(&hunter.Character, rank,
+		func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			buff.Activate(sim)
+		}, spelldata.Chance(chance))
+	trigger.Name = "Resourcefulness - Trigger"
+
+	hunter.MakeProcTriggerAura(trigger)
 }
 
 var striderKickRank = spellData.StriderKick.Highest()

@@ -73,25 +73,33 @@ enum HunterStingType {
 }
 
 message HunterOptions {
+	// The quivers the client's items describe, one a ranged attack speed, named as the generated
+	// sim/hunter/ammo_auto_gen.go keys them and numbered by their item id, so the UI lists them from
+	// this enum alone. The most speed first, which is the order the UI shows them in.
 	enum QuiverBonus {
-		QuiverNone = 0;
-		Speed10 = 1;
-		Speed11 = 2;
-		Speed12 = 3;
-		Speed13 = 4;
-		Speed14 = 5;
-		Speed15 = 6;
+		QuiverNone                = 0;
+		AncientSinewWrappedLamina = 18714;
+		QuickdrawQuiver           = 8217;
+		HeavyQuiver               = 7371;
+		QuiverOfTheNightWatch     = 3605;
+		HuntingQuiver             = 3573;
 	}
 	QuiverBonus quiver_bonus = 1;
 
+	// The arrows the client's items describe, named as the generated sim/hunter/ammo_auto_gen.go
+	// keys them and numbered by their item id, so the UI lists them from this enum alone. The most
+	// damage first, which is the order the UI shows them in.
 	enum Ammo {
-		AmmoNone = 0;
-		TimelessArrow = 1;
-		MysteriousArrow = 2;
-		AdamantiteStinger = 3;
-		WardensArrow = 4;
-		HalaaniRazorshaft = 5;
-		BlackflightArrow = 6;
+		AmmoNone           = 0;
+		SwiftfeatherArrow  = 274387;
+		ThoriumHeadedArrow = 18042;
+		IceThreadedArrow   = 19316;
+		ExplosiveArrow     = 10579;
+		JaggedArrow        = 11285;
+		FeatheredArrow     = 3464;
+		RazorArrow         = 3030;
+		SharpArrow         = 2515;
+		RoughArrow         = 2512;
 	}
 	Ammo ammo = 2;
 
